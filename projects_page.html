@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio projects and technical work">
+    <title>Projects - Your Name</title>
+    
+    <style>
+        /* ============================================
+           EASY CUSTOMIZATION - Match your index.html
+           ============================================ */
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --background: #f9fafb;
+            --card-background: #ffffff;
+            --border-color: #e5e7eb;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-main);
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background);
+        }
+        
+        /* Navigation - Copy from index.html */
+        nav {
+            background-color: var(--card-background);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+        
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        nav .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Project Card - EASY TO DUPLICATE */
+        .project {
+            background: var(--card-background);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+            overflow: hidden;
+            /* Add smooth scroll offset for anchor links */
+            scroll-margin-top: 100px;
+        }
+        
+        .project-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+        }
+        
+        .project-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .project-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .project-content {
+            padding: 2rem;
+        }
+        
+        .project-description {
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .project-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        /* Tech Stack Tags */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .tech-tag {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        /* Project Features List */
+        .features {
+            margin: 1.5rem 0;
+        }
+        
+        .features h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .features ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .features li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        /* Project Links */
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        
+        .project-link:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .project-link.secondary {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .project-link.secondary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: background-color 0.3s, transform 0.3s;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+        
+        footer a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .project-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            nav .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation - Same as index.html -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Your Name</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>My Projects</h1>
+        <p>A showcase of my technical work and creative solutions</p>
+    </div>
+
+    <div class="container">
+        <!-- ============================================
+             PROJECT TEMPLATE
+             Copy this entire section to add new projects
+             Just update the id, content, and links!
+             ============================================ -->
+        
+        <!-- PROJECT 1 - Portfolio Website -->
+        <article class="project" id="portfolio">
+            <div class="project-header">
+                <h2>🌐 Portfolio Website</h2>
+                <div class="project-meta">
+                    <span>📅 January 2025</span>
+                    <span>⏱️ 2 weeks</span>
+                    <span>👤 Solo Project</span>
+                </div>
+            </div>
+            
+            <div class="project-content">
+                <div class="project-description">
+                    <p>
+                        A fully responsive portfolio website built from scratch and deployed on AWS infrastructure. 
+                        The site demonstrates modern web development practices, cloud architecture knowledge, and 
+                        attention to performance and security.
+                    </p>
+                    <p>
+                        The project showcases the complete development lifecycle from initial design through 
+                        production deployment, including DNS configuration, SSL certificate management, and 
+                        global content delivery through CloudFront CDN.
+                    </p>
+                </div>
+                
+                <!-- Optional: Add project screenshot/image -->
+                <!-- <img src="images/portfolio-screenshot.jpg" alt="Portfolio Website Screenshot" class="project-image"> -->
+                
+                <div class="tech-stack">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">AWS S3</span>
+                    <span class="tech-tag">CloudFront</span>
+                    <span class="tech-tag">Route 53</span>
+                    <span class="tech-tag">Certificate Manager</span>
+                </div>
+                
+                <div class="features">
+                    <h3>Key Features & Accomplishments</h3>
+                    <ul>
+                        <li>Fully responsive design that works on all devices</li>
+                        <li>HTTPS-secured with custom domain and SSL certificate</li>
+                        <li>Global CDN distribution with sub-100ms load times worldwide</li>
+                        <li>Origin Access Control (OAC) for secure S3 bucket access</li>
+                        <li>Automated deployment workflow with CloudFront invalidations</li>
+                        <li>Optimized caching strategy for performance</li>
+                        <li>Clean, semantic HTML and accessible design</li>
+                    </ul>
+                </div>
+                
+                <div class="features">
+                    <h3>Technical Challenges & Solutions</h3>
+                    <ul>
+                        <li><strong>Challenge:</strong> Securing S3 bucket while allowing CloudFront access<br>
+                            <strong>Solution:</strong> Implemented Origin Access Control with specific IAM policies</li>
+                        <li><strong>Challenge:</strong> Managing cache invalidations after content updates<br>
+                            <strong>Solution:</strong> Created automated invalidation workflow and versioned assets</li>
+                        <li><strong>Challenge:</strong> DNS propagation and SSL certificate validation<br>
+                            <strong>Solution:</strong> Configured Route 53 with proper A records and ACM validation</li>
+                    </ul>
+                </div>
+                
+                <div class="project-links">
+                    <a href="https://yourname.com" class="project-link" target="_blank">
+                        🔗 View Live Site
+                    </a>
+                    <a href="https://github.com/yourusername/portfolio" class="project-link secondary" target="_blank">
+                        📂 GitHub Repository
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- PROJECT 2 - Task Management App -->
+        <article class="project" id="task-manager">
+            <div class="project-header">
+                <h2>✅ Task Management Application</h2>
+                <div class="project-meta">
+                    <span>📅 December 2024</span>
+                    <span>⏱️ 3 weeks</span>
+                    <span>👤 Solo Project</span>
+                </div>
+            </div>
+            
+            <div class="project-content">
+                <div class="project-description">
+                    <p>
+                        A full-featured task management application with real-time updates, category filtering, 
+                        and local storage persistence. Built to demonstrate proficiency with modern JavaScript 
+                        patterns and state management.
+                    </p>
+                    <p>
+                        The application includes drag-and-drop functionality, due date tracking, priority levels, 
+                        and a clean, intuitive user interface inspired by modern productivity tools.
+                    </p>
+                </div>
+                
+                <div class="tech-stack">
+                    <span class="tech-tag">JavaScript ES6+</span>
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">LocalStorage API</span>
+                    <span class="tech-tag">Drag & Drop API</span>
+                </div>
+                
+                <div class="features">
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li>Create, edit, and delete tasks with full CRUD operations</li>
+                        <li>Drag-and-drop interface for task reordering</li>
+                        <li>Category-based filtering and organization</li>
+                        <li>Priority levels (High, Medium, Low) with color coding</li>
+                        <li>Due date tracking with overdue highlighting</li>
+                        <li>Persistent storage using browser LocalStorage</li>
+                        <li>Responsive design for mobile and desktop</li>
+                        <li>Dark mode toggle</li>
+                    </ul>
+                </div>
+                
+                <div class="project-links">
+                    <a href="https://yourusername.github.io/task-manager" class="project-link" target="_blank">
+                        🔗 View Demo
+                    </a>
+                    <a href="https://github.com/yourusername/task-manager" class="project-link secondary" target="_blank">
+                        📂 GitHub Repository
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- PROJECT 3 - Data Visualization Dashboard -->
+        <article class="project" id="data-dashboard">
+            <div class="project-header">
+                <h2>📊 Data Visualization Dashboard</h2>
+                <div class="project-meta">
+                    <span>📅 November 2024</span>
+                    <span>⏱️ 4 weeks</span>
+                    <span>👥 Team of 3</span>
+                </div>
+            </div>
+            
+            <div class="project-content">
+                <div class="project-description">
+                    <p>
+                        An interactive dashboard for visualizing complex datasets with multiple chart types, 
+                        real-time filtering, and export capabilities. Built as part of a team project to 
+                        demonstrate collaboration and advanced frontend development skills.
+                    </p>
+                </div>
+                
+                <div class="tech-stack">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">D3.js</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">Express</span>
+                    <span class="tech-tag">MongoDB</span>
+                    <span class="tech-tag">Chart.js</span>
+                </div>
+                
+                <div class="features">
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li>Interactive charts: line, bar, pie, and scatter plots</li>
+                        <li>Real-time data filtering and search functionality</li>
+                        <li>CSV and JSON data import/export</li>
+                        <li>Customizable dashboard layouts with drag-and-drop widgets</li>
+                        <li>RESTful API for data management</li>
+                        <li>User authentication and authorization</li>
+                        <li>Responsive grid system for mobile compatibility</li>
+                    </ul>
+                </div>
+                
+                <div class="project-links">
+                    <a href="#" class="project-link" target="_blank">
+                        🔗 View Demo
+                    </a>
+                    <a href="https://github.com/yourusername/dashboard" class="project-link secondary" target="_blank">
+                        📂 GitHub Repository
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- ============================================
+             TO ADD A NEW PROJECT:
+             
+             1. Copy from <!-- PROJECT X to </article>
+             2. Paste below the last project
+             3. Update the id="unique-project-name"
+             4. Update all content (title, dates, description, etc.)
+             5. Update tech tags
+             6. Update features list
+             7. Update links
+             8. Save and upload to S3
+             9. Invalidate CloudFront cache: /projects.html
+             
+             To link from index.html:
+             <a href="projects.html#unique-project-name">Learn More →</a>
+             ============================================ -->
+
+    </div>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+        <div>
+            <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+            <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+            <a href="mailto:your.email@example.com">Email</a>
+        </div>
+    </footer>
+
+    <!-- JavaScript for smooth scrolling and back-to-top button -->
+    <script>
+        // Smooth scroll to project when coming from index.html with hash
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if there's a hash in the URL
+            if (window.location.hash) {
+                const targetId = window.location.hash.substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    // Small delay to ensure page is fully loaded
+                    setTimeout(() => {
+                        targetElement.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 100);
+                }
+            }
+        });
+
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('backToTop');
+        
+        // Show/hide button based on scroll position
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        // Smooth scroll to top when clicked
+        backToTopButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for all anchor links on the page
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

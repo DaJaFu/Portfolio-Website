@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional portfolio showcasing projects and skills">
+    <meta name="author" content="Daniel">
+    <title>Daniel Fussell - Portfolio</title>
+    
+    <style>
+        /* ============================================
+           EASY CUSTOMIZATION SECTION
+           Change these values to update colors/fonts
+           ============================================ */
+        :root {
+            --primary-color: #2563eb;      /* Main brand color */
+            --secondary-color: #1e40af;    /* Darker shade */
+            --accent-color: #3b82f6;       /* Highlight color */
+            --text-dark: #1f2937;          /* Dark text */
+            --text-light: #6b7280;         /* Light text */
+            --background: #f9fafb;         /* Page background */
+            --card-background: #ffffff;    /* Card/section background */
+            --border-color: #e5e7eb;       /* Borders */
+            
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-mono: 'Courier New', monospace;
+        }
+        
+        /* ============================================
+           CORE STYLING (Minimal changes needed below)
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-main);
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background);
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: var(--card-background);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+        
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        nav .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .hero .cta-button {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background-color: white;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .hero .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        
+        /* Card Grid - EASY TO ADD MORE ITEMS */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .card {
+            background: var(--card-background);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .card p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+        
+        .card .card-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .card .card-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Skills List - EASY TO ADD MORE SKILLS */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 4rem;
+        }
+        
+        .skill-badge {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .skill-badge:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        
+        footer .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        
+        footer .social-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        footer .social-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            nav .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================
+         NAVIGATION - Add/remove links here
+         ============================================ -->
+    <nav>
+        <div class="nav-container">
+            <a href="home.html" class="logo">Home</a>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ============================================
+         HERO SECTION - Update your intro here
+         ============================================ -->
+    <section class="hero">
+        <h1>Hi, I'm Daniel!</h1>
+        <p>Security Analyst | Network Engineer | Martial Artist</p>
+        <a href="projects.html" class="cta-button">View My Work</a>
+    </section>
+
+    <div class="container">
+        <!-- ============================================
+             FEATURED PROJECTS
+             Copy/paste the card div to add more projects
+             ============================================ -->
+        <div class="section-header">
+            <h2>Featured Projects</h2>
+            <p>A selection of my recent work</p>
+        </div>
+
+        <div class="card-grid">
+            <!-- PROJECT 1 - Template -->
+            <div class="card">
+                <h3> _blank </h3>
+                <p>_blank</p>
+                <p><strong>Tech Stack:</strong> N/A </p>
+                <a href="projects.html#project1" class="card-link">Learn More →</a>
+            </div>
+
+            <!-- PROJECT 2 - Copy this block to add more -->
+            <div class="card">
+                <h3>💼 Portfolio Website</h3>
+                <p>A responsive portfolio site built from scratch and deployed on AWS S3 with CloudFront CDN for global distribution.</p>
+                <p><strong>Tech Stack:</strong> HTML, CSS, AWS S3, CloudFront, Claude</p>
+                <a href="projects.html#portfolio" class="card-link">Learn More →</a>
+            </div>
+
+            <!-- PROJECT 3 -->
+            <div class="card">
+                <h3>_blank</h3>
+                <p>_blank</p>
+                <p><strong>Tech Stack:</strong>N/A</p>
+                <a href="projects.html#dashboard" class="card-link">Learn More →</a>
+            </div>
+
+            <!-- ADD MORE PROJECTS: Just copy any card div above and modify the content -->
+        </div>
+
+        <!-- ============================================
+             SKILLS SECTION
+             Add more skill-badge divs to add skills
+             ============================================ -->
+        <div class="section-header">
+            <h2>Skills & Technologies</h2>
+            <p>Tools and languages I work with</p>
+        </div>
+
+        <div class="skills-container">
+            <!-- Add or remove skills by copying these divs -->
+            <span class="skill-badge">Python</span>
+            <span class="skill-badge">AWS</span>
+            <span class="skill-badge">Git</span>
+            <span class="skill-badge">Linux</span>
+            <span class="skill-badge">Docker</span>
+            <span class="skill-badge">Fart</span>
+            <!-- Add more: <span class="skill-badge">Your Skill</span> -->
+        </div>
+
+        <!-- ============================================
+             ABOUT PREVIEW
+             ============================================ -->
+        <div class="section-header">
+            <h2>About Me</h2>
+            <p>My name is Daniel, and I love to learn about interesting technologies! I also practice Muay Thai, and have been doing so for around 8 years!</p>
+        </div>
+
+        <div class="card-grid">
+            <div class="card">
+                <h3>Background</h3>
+                <p> COME BACK LATER </p>
+                <a href="about.html" class="card-link">Read Full Story →</a>
+            </div>
+
+            <div class="card">
+                <h3>💡 What I Do</h3>
+                <p>I specialize in security engingeering, network architecture, and creating elegant solutions to complex problems.</p>
+                <a href="about.html#expertise" class="card-link">See Expertise →</a>
+            </div>
+
+            <div class="card">
+                <h3>🎯 Current Focus</h3>
+                <p>Currently learning advanced AWS services, developing my security toolset, and deploying small business level networks.</p>
+                <a href="blog.html" class="card-link">Read My Blog →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         FOOTER - Update social links
+         ============================================ -->
+    <footer>
+        <p>&copy; 2026 Daniel Fussell. All rights reserved.</p>
+        <p>This site built using Claude, HTML, CSS, and hosted on AWS</p>
+        <div class="social-links">
+            <a href="https://github.com/DaJaFu" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/daniel-fussell-509666229/" target="_blank">LinkedIn</a>
+            <a href="mailto:dnlfssll@gmail.com">Email</a>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         OPTIONAL: Add JavaScript here for interactivity
+         ============================================ -->
+    <script>
+        // Example: Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Add more JavaScript functionality here as needed
+    </script>
+</body>
+</html>
+
+<!-- ============================================
+     FILE STRUCTURE FOR YOUR SITE:
+     
+     my-portfolio/
+     ├── index.html (this file - home page)
+     ├── about.html (create this - about page)
+     ├── projects.html (create this - detailed projects)
+     ├── blog.html (create this - blog/articles)
+     ├── contact.html (create this - contact form)
+     ├── css/
+     │   └── style.css (optional - move CSS here)
+     ├── js/
+     │   └── script.js (optional - move JS here)
+     └── images/
+         └── (your images here)
+     
+     ============================================ -->
