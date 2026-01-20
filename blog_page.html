@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog posts, updates, and technical articles">
+    <title>Blog - Your Name</title>
+    
+    <style>
+        /* ============================================
+           EASY CUSTOMIZATION - Match your other pages
+           ============================================ */
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --background: #f9fafb;
+            --card-background: #ffffff;
+            --border-color: #e5e7eb;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-main);
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background);
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: var(--card-background);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+        
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        nav .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Blog Post Card - EASY TO DUPLICATE */
+        .blog-post {
+            background: var(--card-background);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+        
+        .blog-post:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .blog-header {
+            padding: 1.5rem 2rem 1rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .blog-header h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .blog-header h2:hover {
+            color: var(--secondary-color);
+        }
+        
+        .blog-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .blog-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        /* Blog Tags */
+        .blog-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .blog-tag {
+            background-color: var(--background);
+            color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+        }
+        
+        /* Blog Content */
+        .blog-content {
+            padding: 2rem;
+        }
+        
+        .blog-preview {
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-full {
+            color: var(--text-dark);
+            line-height: 1.8;
+            display: none;
+        }
+        
+        .blog-full.expanded {
+            display: block;
+        }
+        
+        .blog-full p {
+            margin-bottom: 1rem;
+        }
+        
+        .blog-full h3 {
+            color: var(--primary-color);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-full ul, .blog-full ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-full li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-full code {
+            background-color: var(--background);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .blog-full pre {
+            background-color: var(--text-dark);
+            color: #fff;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        .blog-full pre code {
+            background-color: transparent;
+            color: #fff;
+            padding: 0;
+        }
+        
+        /* Read More Button */
+        .read-more-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .read-more-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .read-more-btn .arrow {
+            transition: transform 0.3s;
+        }
+        
+        .read-more-btn.expanded .arrow {
+            transform: rotate(180deg);
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: background-color 0.3s, transform 0.3s;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+        
+        footer a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .blog-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            nav .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .blog-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="home.html" class="logo">Your Name</a>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="project_page.html">Projects</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Blog & Updates</h1>
+        <p>Thoughts on development, projects, and lessons learned</p>
+    </div>
+
+    <div class="container">
+        <!-- ============================================
+             BLOG POST TEMPLATE
+             Copy this entire article block to add new posts
+             ============================================ -->
+        
+        <!-- BLOG POST 1 -->
+        <article class="blog-post">
+            <div class="blog-header">
+                <h2>Building My Portfolio with AWS: Lessons Learned</h2>
+                <div class="blog-meta">
+                    <span>📅 January 16, 2025</span>
+                    <span>⏱️ 5 min read</span>
+                    <span>👤 Your Name</span>
+                </div>
+                <div class="blog-tags">
+                    <span class="blog-tag">AWS</span>
+                    <span class="blog-tag">CloudFront</span>
+                    <span class="blog-tag">Web Development</span>
+                </div>
+            </div>
+            
+            <div class="blog-content">
+                <div class="blog-preview">
+                    <p>
+                        Deploying my portfolio on AWS was an incredible learning experience. From S3 buckets 
+                        to CloudFront distributions, I discovered the intricacies of cloud infrastructure and 
+                        learned valuable lessons about DNS, caching, and security...
+                    </p>
+                </div>
+                
+                <div class="blog-full">
+                    <p>
+                        When I decided to build my portfolio from scratch, I knew I wanted to do more than 
+                        just create a website—I wanted to understand the entire deployment pipeline. That's 
+                        when I chose AWS as my hosting platform.
+                    </p>
+                    
+                    <h3>The Initial Setup</h3>
+                    <p>
+                        My journey started with creating an S3 bucket. At first, I tried using the S3 static 
+                        website hosting feature, but I quickly realized this wouldn't give me HTTPS support. 
+                        That's when I learned about CloudFront and Origin Access Control.
+                    </p>
+                    
+                    <h3>Key Challenges I Faced</h3>
+                    <ul>
+                        <li><strong>DNS Configuration:</strong> Understanding how Route 53 works and properly 
+                            configuring A records took some trial and error.</li>
+                        <li><strong>SSL Certificates:</strong> Learning that certificates must be in us-east-1 
+                            for CloudFront was a crucial detail.</li>
+                        <li><strong>Cache Invalidation:</strong> Figuring out when and how to invalidate 
+                            CloudFront cache after updates.</li>
+                        <li><strong>Origin Access Control:</strong> Setting up OAC instead of the legacy OAI 
+                            method for better security.</li>
+                    </ul>
+                    
+                    <h3>What I Learned</h3>
+                    <p>
+                        The most valuable lesson was understanding the difference between S3 static website 
+                        hosting and using S3 as a CloudFront origin. While the static website feature is 
+                        simpler, using CloudFront with OAC provides better security, HTTPS support, and 
+                        global performance through edge locations.
+                    </p>
+                    
+                    <h3>Technical Architecture</h3>
+                    <p>
+                        My final setup uses CloudFront as the CDN layer, with an S3 bucket as the private 
+                        origin. Route 53 handles DNS resolution, and AWS Certificate Manager provides the 
+                        SSL certificate. This architecture gives me:
+                    </p>
+                    <ul>
+                        <li>Global content delivery with low latency</li>
+                        <li>HTTPS encryption with custom domain</li>
+                        <li>Secure, private S3 bucket accessible only via CloudFront</li>
+                        <li>Cost-effective hosting (under $2/month)</li>
+                    </ul>
+                    
+                    <h3>Next Steps</h3>
+                    <p>
+                        Now that the infrastructure is solid, I'm focusing on content optimization—compressing 
+                        images, minifying CSS/JS, and implementing proper cache headers for different file types. 
+                        I'm also exploring AWS Lambda@Edge for more advanced edge computing capabilities.
+                    </p>
+                    
+                    <p>
+                        If you're considering building your portfolio on AWS, my advice is to start simple with 
+                        just S3 and CloudFront, then gradually add complexity as you understand each component. 
+                        The learning curve is steep, but the knowledge you gain is invaluable.
+                    </p>
+                </div>
+                
+                <button class="read-more-btn" onclick="togglePost(this)">
+                    <span class="btn-text">Read More</span>
+                    <span class="arrow">▼</span>
+                </button>
+            </div>
+        </article>
+
+        <!-- BLOG POST 2 -->
+        <article class="blog-post">
+            <div class="blog-header">
+                <h2>Understanding DNS: From Domain to IP Address</h2>
+                <div class="blog-meta">
+                    <span>📅 January 10, 2025</span>
+                    <span>⏱️ 8 min read</span>
+                    <span>👤 Your Name</span>
+                </div>
+                <div class="blog-tags">
+                    <span class="blog-tag">DNS</span>
+                    <span class="blog-tag">Networking</span>
+                    <span class="blog-tag">Route 53</span>
+                </div>
+            </div>
+            
+            <div class="blog-content">
+                <div class="blog-preview">
+                    <p>
+                        DNS is often called the "phonebook of the internet," but what does that really mean? 
+                        Let's dive deep into how DNS works, the different record types, and why understanding 
+                        this is crucial for any web developer...
+                    </p>
+                </div>
+                
+                <div class="blog-full">
+                    <p>
+                        When you type a domain name like "google.com" into your browser, your computer doesn't 
+                        inherently know where to find Google's servers. That's where DNS (Domain Name System) 
+                        comes in—it translates human-readable domain names into IP addresses that computers use 
+                        to communicate.
+                    </p>
+                    
+                    <h3>The DNS Resolution Process</h3>
+                    <p>Here's what happens behind the scenes:</p>
+                    <ol>
+                        <li>Your browser checks its cache for the IP address</li>
+                        <li>If not cached, it asks your operating system</li>
+                        <li>Your OS asks your configured DNS resolver (usually your ISP)</li>
+                        <li>The resolver queries root nameservers</li>
+                        <li>Root servers direct to TLD (Top-Level Domain) nameservers (.com, .org, etc.)</li>
+                        <li>TLD nameservers direct to authoritative nameservers</li>
+                        <li>Authoritative nameservers return the IP address</li>
+                        <li>The IP is cached at multiple levels and returned to your browser</li>
+                    </ol>
+                    
+                    <h3>DNS Record Types</h3>
+                    <p>Different record types serve different purposes:</p>
+                    <ul>
+                        <li><strong>A Record:</strong> Maps domain to IPv4 address</li>
+                        <li><strong>AAAA Record:</strong> Maps domain to IPv6 address</li>
+                        <li><strong>CNAME Record:</strong> Creates an alias to another domain</li>
+                        <li><strong>MX Record:</strong> Directs email to mail servers</li>
+                        <li><strong>TXT Record:</strong> Stores text information (verification, SPF, etc.)</li>
+                        <li><strong>NS Record:</strong> Specifies authoritative nameservers</li>
+                    </ul>
+                    
+                    <h3>TTL (Time To Live)</h3>
+                    <p>
+                        TTL determines how long DNS records are cached. A low TTL (like 300 seconds) means 
+                        changes propagate quickly but generate more DNS queries. A high TTL (like 86400 seconds) 
+                        improves performance but delays propagation of changes.
+                    </p>
+                    
+                    <h3>Practical Application: My Portfolio</h3>
+                    <p>
+                        For my portfolio, I use Route 53 with A records (configured as Aliases) pointing to 
+                        my CloudFront distribution. This gives me:
+                    </p>
+                    <ul>
+                        <li>Clean URLs without exposing CloudFront domains</li>
+                        <li>Fast DNS resolution through AWS's global network</li>
+                        <li>Easy management of DNS records</li>
+                        <li>Health checks and failover capabilities (if needed)</li>
+                    </ul>
+                    
+                    <h3>Common DNS Issues</h3>
+                    <p>
+                        During my setup, I encountered several common issues:
+                    </p>
+                    <ul>
+                        <li>DNS propagation delays (can take 24-48 hours)</li>
+                        <li>Cached DNS records on local machine</li>
+                        <li>Incorrect record types (using CNAME for root domain)</li>
+                        <li>Nameserver configuration at domain registrar</li>
+                    </ul>
+                    
+                    <p>
+                        Understanding DNS has been fundamental to my web development journey. It's one of 
+                        those "invisible" technologies that just works—until it doesn't, and then you really 
+                        need to understand what's happening under the hood.
+                    </p>
+                </div>
+                
+                <button class="read-more-btn" onclick="togglePost(this)">
+                    <span class="btn-text">Read More</span>
+                    <span class="arrow">▼</span>
+                </button>
+            </div>
+        </article>
+
+        <!-- BLOG POST 3 -->
+        <article class="blog-post">
+            <div class="blog-header">
+                <h2>First Week of Coding: Reflections and Progress</h2>
+                <div class="blog-meta">
+                    <span>📅 January 5, 2025</span>
+                    <span>⏱️ 3 min read</span>
+                    <span>👤 Your Name</span>
+                </div>
+                <div class="blog-tags">
+                    <span class="blog-tag">Learning</span>
+                    <span class="blog-tag">Beginner</span>
+                    <span class="blog-tag">HTML/CSS</span>
+                </div>
+            </div>
+            
+            <div class="blog-content">
+                <div class="blog-preview">
+                    <p>
+                        Starting my journey into web development has been both exciting and overwhelming. 
+                        This week, I focused on mastering HTML and CSS fundamentals, and I've learned more 
+                        than I expected...
+                    </p>
+                </div>
+                
+                <div class="blog-full">
+                    <p>
+                        I've always been fascinated by how websites work, but I never took the plunge into 
+                        actually building one until this week. Armed with determination and a text editor, 
+                        I dove into HTML and CSS.
+                    </p>
+                    
+                    <h3>What I've Learned</h3>
+                    <p>The fundamentals are more important than I thought:</p>
+                    <ul>
+                        <li>Semantic HTML creates better structure and accessibility</li>
+                        <li>CSS flexbox and grid are game-changers for layouts</li>
+                        <li>The box model isn't as confusing as I feared</li>
+                        <li>Browser developer tools are incredibly powerful</li>
+                        <li>Responsive design requires thinking mobile-first</li>
+                    </ul>
+                    
+                    <h3>Challenges Faced</h3>
+                    <p>
+                        Not everything came easily. I spent hours debugging why my navigation bar wouldn't 
+                        stay at the top of the page (turns out <code>position: sticky</code> was what I needed). 
+                        I also struggled with centering elements until I learned about flexbox.
+                    </p>
+                    
+                    <h3>Small Wins</h3>
+                    <p>
+                        My proudest moment was successfully creating a responsive card layout that looks 
+                        great on both desktop and mobile. Seeing something I built adapt seamlessly to 
+                        different screen sizes felt like magic.
+                    </p>
+                    
+                    <h3>What's Next</h3>
+                    <p>
+                        Next week, I'm diving into JavaScript. I'm excited (and a little nervous) to add 
+                        interactivity to my projects. I've heard it can be tricky, but I'm ready for the 
+                        challenge.
+                    </p>
+                    
+                    <p>
+                        If you're just starting out like me, my advice is: don't be afraid to break things. 
+                        Every error message is a learning opportunity, and every bug you fix makes you a 
+                        better developer.
+                    </p>
+                </div>
+                
+                <button class="read-more-btn" onclick="togglePost(this)">
+                    <span class="btn-text">Read More</span>
+                    <span class="arrow">▼</span>
+                </button>
+            </div>
+        </article>
+
+        <!-- ============================================
+             TO ADD A NEW BLOG POST:
+             
+             1. Copy from <!-- BLOG POST X to </article>
+             2. Paste at the TOP (newest posts first)
+             3. Update all content:
+                - Title
+                - Date (use format: Month DD, YYYY)
+                - Read time
+                - Tags
+                - Preview text (2-3 sentences)
+                - Full content
+             4. Save and upload to S3
+             5. Invalidate CloudFront: /blog.html
+             ============================================ -->
+
+    </div>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+        <div>
+            <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+            <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+            <a href="mailto:your.email@example.com">Email</a>
+        </div>
+    </footer>
+
+    <!-- JavaScript for expand/collapse and back-to-top -->
+    <script>
+        // Toggle blog post expand/collapse
+        function togglePost(button) {
+            const blogContent = button.closest('.blog-content');
+            const fullContent = blogContent.querySelector('.blog-full');
+            const btnText = button.querySelector('.btn-text');
+            const arrow = button.querySelector('.arrow');
+            
+            // Toggle the expanded class
+            fullContent.classList.toggle('expanded');
+            button.classList.toggle('expanded');
+            
+            // Update button text
+            if (fullContent.classList.contains('expanded')) {
+                btnText.textContent = 'Show Less';
+                // Smooth scroll to top of post
+                const blogPost = button.closest('.blog-post');
+                blogPost.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                btnText.textContent = 'Read More';
+            }
+        }
+
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
